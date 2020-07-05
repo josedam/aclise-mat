@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../core/services/auth.service';
+import { toCapitalLeters } from 'src/app/core/utils';
 
 @Component({
   selector: 'app-profile-details',
@@ -15,7 +16,7 @@ export class ProfileDetailsComponent implements OnInit {
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
-    this.fullName = this.authService.getCurrentUser().fullname;
+    this.fullName = toCapitalLeters(this.authService.getCurrentUser().fullname);
     this.email = this.authService.getCurrentUser().email;
   }
 

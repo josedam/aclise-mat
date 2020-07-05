@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         const savedUserEmail = localStorage.getItem('savedUserEmail');
 
         this.loginForm = new FormGroup({
-            email: new FormControl(savedUserEmail, [Validators.required, Validators.email]),
+            email: new FormControl(savedUserEmail, [Validators.required]),
             password: new FormControl('', Validators.required),
             rememberMe: new FormControl(savedUserEmail !== null)
         });

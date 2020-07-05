@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
         if( this.authService.isUserLoged()) {
             if( this.authService.isTokenExpired()){
                 this.notificationService.openSnackBar('Su sesion ha expirado...');
-                this.router.navigate(['auth/logout']);
+                this.router.navigate(['auth/login']);
                 return false;
 
             } else {
@@ -29,15 +29,7 @@ export class AuthGuard implements CanActivate {
         }    
     }    
         
-    //     if(this.authService.isTokenExpired()) {
-    //         this.notificationService.openSnackBar('Su sesion ha expirado...');
-    //         this.router.navigate(['auth/logout']);
-    //         return false;
-            
-    //      } else {
-    //          return true;
-    //      }
-    // }
+    
 
     //     const user = this.authService.getCurrentUser();
 

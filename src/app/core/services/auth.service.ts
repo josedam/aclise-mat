@@ -31,7 +31,7 @@ export class AuthenticationService {
                 this._currentUser = {
                     ...resp['user'],
                     token: resp['accessToken'],
-                    isAdmin: this.isUserAdmin(resp['user']['rol']) 
+                    isAdmin: this.isUserRolAdmin(resp['user']['rol']) 
                 };
                 console.log('sale login');
                 return true;
@@ -42,8 +42,11 @@ export class AuthenticationService {
         );
     }
     
+    isUserAdmin() {
+        return this.isUserLoged() && this.getCurrentUser().isAdmin;
+    }
 
-    private isUserAdmin(rol: string): boolean {
+    private isUserRolAdmin(rol: string): boolean {
         return rol === UserRol.ADMIN || rol === UserRol.SUPER_USER;
     }
 
@@ -97,7 +100,14 @@ export class AuthenticationService {
         return of(true).pipe(delay(1000));
     }
 
-    changePassword(email: string, currentPwd: string, newPwd: string) {
+    changePassword(username: string, password: string, newPassword: string) {
+        const url = `${BACK_URL}/users/psw`;
+        return this.http.patch(url, {username, password, newPassword});
+    }        
+    //     return of(true).pipe(delay(1000));
+    // }
+
+    changeData({ username, fullname, email }: { username: string; fullname: string; email: string; }):Observable<any> {
         return of(true).pipe(delay(1000));
     }
 

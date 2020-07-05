@@ -18,14 +18,12 @@ export class AuthInterceptor implements HttpInterceptor {
         private dialog: MatDialog) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-        const user = this.authService.getCurrentUser();
-
-        if (user && user.token) {
+        
+        if (this.authService.isUserLoged()) {
 
             const cloned = req.clone({
                 headers: req.headers.set('Authorization',
-                    'Bearer ' + user.token)
+                    'Bearer ' + this.authService.getCurrentUser().token)
             });
 
             return next.handle(cloned).pipe(tap(() => { }, (err: any) => {

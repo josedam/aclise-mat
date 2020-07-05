@@ -58,12 +58,14 @@ export class ChangePasswordComponent implements OnInit {
       return;
     }
 
-    const email = this.authService.getCurrentUser().email;
+    const username = this.authService.getCurrentUser().username;
 
-    this.authService.changePassword(email, this.currentPassword, this.newPassword)
+    this.authService.changePassword(username, this.currentPassword, this.newPassword)
       .subscribe(
         data => {
-          this.logger.info(`User ${email} changed password.`);
+          console.log('Chgpassw...');
+          console.log(data);
+          this.logger.info(`User ${username} changed password.`);
           this.form.reset();
           this.notificationService.openSnackBar('Su Clave fue actualizada.');
         },

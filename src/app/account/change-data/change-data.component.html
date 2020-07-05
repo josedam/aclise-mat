@@ -1,0 +1,48 @@
+<form [formGroup]="form">
+  <div fxLayout="row">
+    <div fxFlex="40%" fxFlex.md="60%" fxFlex.sm="50%" fxFlex.xs="100%">
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Nombre Completo"
+          formControlName="fullname"
+          type="text"
+        />
+
+        <mat-error *ngIf="form.controls['fullname'].hasError('required')">
+          Debe ingresar el Nombre Completo
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Correo Electronico"
+          formControlName="email"
+          type="email"
+          autocomplete="email"
+        />
+
+        <mat-error *ngIf="form.controls['email'].hasError('email')">
+          Debe Ingresar un eMail Valido
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
+        (click)="changeData()"
+      >
+        Grabar
+      </button>
+      <button
+        mat-button
+        (click)="restoreData()"
+        type="button"
+      >
+        Restaurar Datos
+      </button>
+    </div>
+  </div>
+</form>
