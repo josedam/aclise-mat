@@ -14,13 +14,16 @@ import { UserRol } from 'src/app/auth/user-rol-enum';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthenticationService {
 
+export class AuthenticationService {
+    private CURRENT_USER = 'currentUser';
     private _currentUser: User ; //= new User;
 
     constructor(
         private http: HttpClient,
         @Inject('LOCALSTORAGE') private localStorage: Storage) {
+
+           this.loadCurrentUser();
     }
 
     login(username: string, password: string):Observable<any> {
@@ -33,7 +36,7 @@ export class AuthenticationService {
                     token: resp['accessToken'],
                     isAdmin: this.isUserRolAdmin(resp['user']['rol']) 
                 };
-                console.log('sale login');
+                this.saveCurrentUser();
                 return true;
             }),
             catchError(e => {
@@ -70,10 +73,24 @@ export class AuthenticationService {
     //         }));
     // }
 
+
+    private loadCurrentUser() {
+        this._currentUser = JSON.parse(this.localStorage.getItem(this.CURRENT_USER));
+    }
+
+    private saveCurrentUser() {
+        this.localStorage.setItem(this.CURRENT_USER,JSON.stringify(this._currentUser));
+    }
+
+    private deleteCurrentUser() {
+        this.localStorage.removeItem(this.CURRENT_USER);
+    }
+
     logout(): void {
         // clear token remove user from local storage to log user out
         // this.localStorage.removeItem('currentUser');
         this._currentUser = null;
+        this.deleteCurrentUser();
     }
 
     isUserLoged(){
@@ -116,7 +133,7 @@ export class AuthenticationService {
     }
 
     renovarToken():Observable<any> {
-        return new Observable();
+        return of(true).pipe(delay(1000));
     }
 
     VerificarRenovarToken(fechaExpSegundos: number): Promise<boolean> {
