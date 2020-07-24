@@ -11,7 +11,7 @@ export class ProfileComponent implements OnInit {
   constructor(private titleService: Title) { }
 
   ngOnInit() {
-    this.titleService.setTitle('Mi Perfil');
+    this.titleService.setTitle('Perfil');
   }
 
 }

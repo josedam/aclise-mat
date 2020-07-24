@@ -1,0 +1,26 @@
+<div fxLayout="row">
+  <div fxFlex="40%" fxFlex.md="60%" fxFlex.sm="50%" fxFlex.xs="100%">
+    <div>
+      <img  class="imagen-avatar" [src]="imageUrl" />
+    </div>
+    <div class='barra-botones'>
+      <button mat-raised-button color="primary" (click)="saveImage()">
+        Grabar
+      </button>
+    
+      <button mat-raised-button color="orange" (click)="fileInput.click()">
+        Seleccionar
+      </button>
+
+      <input
+        hidden
+        type="file"
+        name="file"
+        #fileInput
+        (change)="onChange(fileInput.files[0])"
+      />
+
+    
+    </div>
+  </div>
+</div>

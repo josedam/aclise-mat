@@ -27,13 +27,13 @@ export class ChangeDataComponent implements OnInit {
       email: new FormControl(this.authService.getCurrentUser().email, Validators.email),
     });
 
-    this.form.get('fullname').valueChanges.subscribe((val) => {
-      this.fullname = val;
-    });
+    // this.form.get('fullname').valueChanges.subscribe((val) => {
+    //   this.fullname = val;
+    // });
 
-    this.form.get('email').valueChanges.subscribe((val) => {
-      this.email = val;
-    });
+    // this.form.get('email').valueChanges.subscribe((val) => {
+    //   this.email = val;
+    // });
 
   }
 
@@ -42,11 +42,13 @@ export class ChangeDataComponent implements OnInit {
     this.form.get('email').setValue(this.authService.getCurrentUser().email);
   }
 
-  changeData() {
+  saveData() {
     const username = this.authService.getCurrentUser().username;
+    const {fullname, email } = this.form.value;
 
+   
     this.authService
-      .changeData({ username, fullname: this.fullname, email: this.email })
+      .changeData({ username, fullname, email })
       .subscribe(
         (data) => {
           console.log('ChgData...');

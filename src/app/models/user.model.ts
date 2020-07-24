@@ -4,6 +4,10 @@ export class User {
     fullName: string = '';
     rol: string = '';
     email: string = '';
+    avatar: string = '';
+    datecreate: Date;
+    dateupdate: Date;
+    datedelete: Date;
     token?: string;
     isAdmin?: boolean = false;
 }

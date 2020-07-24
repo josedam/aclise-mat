@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form   [formGroup]="form">
   <div fxLayout="row">
     <div fxFlex="40%" fxFlex.md="60%" fxFlex.sm="50%" fxFlex.xs="100%">
       <mat-form-field class="full-width">
@@ -31,8 +31,8 @@
       <button
         mat-raised-button
         color="primary"
-        [disabled]="form.invalid"
-        (click)="changeData()"
+        [disabled]="form.invalid || form.pristine"
+        (click)="saveData()"
       >
         Grabar
       </button>

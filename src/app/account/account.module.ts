@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangeDataComponent } from './change-data/change-data.component';
+import { ChangeImageComponent } from './change-image/change-image.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { ChangeDataComponent } from './change-data/change-data.component';
     SharedModule,
     AccountRoutingModule
   ],
-  declarations: [ProfileComponent, ChangePasswordComponent, ProfileDetailsComponent, ChangeDataComponent],
+  declarations: [ProfileComponent, ChangePasswordComponent, ProfileDetailsComponent, ChangeDataComponent, ChangeImageComponent],
   exports: [ProfileComponent]
 })
 export class AccountModule { }

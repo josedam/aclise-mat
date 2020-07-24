@@ -1,11 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError, tap, filter } from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 
 import { environment } from '../../../environments/environment';
-import { of, throwError, Observable } from 'rxjs';
+import { of, throwError, Observable, BehaviorSubject } from 'rxjs';
 import { delay } from 'rxjs/operators'
 import { BACK_URL } from 'src/app/auth/auth.config';
 import { User } from 'src/app/models/user.model';
@@ -19,6 +19,8 @@ export class AuthenticationService {
     private CURRENT_USER = 'currentUser';
     private _currentUser: User ; //= new User;
 
+    public onChangeUser = new BehaviorSubject<User>(this._currentUser);
+    
     constructor(
         private http: HttpClient,
         @Inject('LOCALSTORAGE') private localStorage: Storage) {
@@ -86,6 +88,10 @@ export class AuthenticationService {
         this.localStorage.removeItem(this.CURRENT_USER);
     }
 
+    changeUserNotify() {
+        this.onChangeUser.next(this._currentUser);
+    }
+
     logout(): void {
         // clear token remove user from local storage to log user out
         // this.localStorage.removeItem('currentUser');
@@ -125,7 +131,10 @@ export class AuthenticationService {
     // }
 
     changeData({ username, fullname, email }: { username: string; fullname: string; email: string; }):Observable<any> {
-        return of(true).pipe(delay(1000));
+        const url = `${BACK_URL}/users/upd`;
+        console.log(username, fullname, email);
+        return this.http.patch(url, {username, fullname, email });
+        // return of(true).pipe(delay(1000));
     }
 
     passwordReset(email: string, token: string, password: string, confirmPassword: string): any {
