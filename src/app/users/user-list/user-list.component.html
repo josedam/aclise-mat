@@ -4,7 +4,7 @@
       <mat-card-content>
         <h2>Usuarios</h2>
 
-        <div class="container">
+        <div class="data-table-container">
           <!-- fxLayout="row" fxLayoutAlign="none none"> -->
 
           <table mat-table #table [dataSource]="rowData">
@@ -32,29 +32,18 @@
               <th mat-header-cell *matHeaderCellDef>Fecha</th>
               <td mat-cell *matCellDef="let row">{{ row.datecreate }}</td>
             </ng-container>
+
             <ng-container matColumnDef="acciones">
               <th mat-header-cell *matHeaderCellDef>Acciones</th>
               <td mat-cell *matCellDef="let row">
-                <button mat-raised-button color="primary">
-                  <mat-icon fontSet="fa" fontIcon="fa-edit" ></mat-icon>
-                </button>
-                <button mat-raised-button color="warn">Del</button>
+                <app-action-edit-btn (click)="editRow(row)"></app-action-edit-btn>
+                <app-action-delete-btn (click)="deleteRow(row)"></app-action-delete-btn>
               </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="columnDefs"></tr>
             <tr mat-row *matRowDef="let row; columns: columnDefs"></tr>
           </table>
-
-          <!-- <ag-grid-angular
-            #agGrid
-            style="width: 100%; height: 500px;"
-            class="ag-theme-alpine"
-            [rowData]="rowData | async"
-            [columnDefs]="columnDefs"
-            rowSelection="multiple"
-          >
-          </ag-grid-angular> -->
         </div>
       </mat-card-content>
       <mat-card-actions>
@@ -63,5 +52,6 @@
         </button>
       </mat-card-actions>
     </mat-card>
+    <app-action-new-fab (click)="newRow()"></app-action-new-fab>
   </div>
 </div>

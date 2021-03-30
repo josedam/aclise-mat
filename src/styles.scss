@@ -155,3 +155,7 @@ p .mat-icon {
 .ag-theme-alpine {
     @include ag-theme-alpine();
 }
+/***************************** Table tool tips***********************************************/
+.custom-tooltip {
+  font-size:  smaller;
+}  

@@ -12,11 +12,13 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 
 
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    
     HttpClientModule,
 
     BrowserModule,
@@ -29,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
       serverLoggingUrl: `http://my-api/logs`,
       level: environment.logLevel,
       serverLogLevel: environment.serverLogLevel
-    })
+    }),
   ],
   bootstrap: [AppComponent]
 })

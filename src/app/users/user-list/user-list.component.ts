@@ -6,25 +6,28 @@ import { NGXLogger } from 'ngx-logger';
 import { UserService } from '../../core/services/user.service';
 import { AgGridAngular } from 'ag-grid-angular';
 import { User } from 'src/app/models/user.model';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogModel,
+} from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css'],
+  styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
-
   title = 'app';
 
-  columnDefs = ['username','fullname','email','rol','datecreate','acciones'];
-
-  //   { headerName: 'Usuario', field: 'username' },
-  //   { headerName: 'Nombre', field: 'fullname' },
-  //   { headerName: 'eMail', field: 'email' },
-  //   { headerName: 'rol', field: 'rol' },
-  //   { headerName: 'creado', field: 'datecreate' },
-  // ];
+  columnDefs = [
+    'username',
+    'fullname',
+    'email',
+    'rol',
+    'datecreate',
+    'acciones',
+  ];
 
   rowData: any;
 
@@ -32,7 +35,8 @@ export class UserListComponent implements OnInit {
     private logger: NGXLogger,
     private notificationService: NotificationService,
     private titleService: Title,
-    private userService: UserService
+    private userService: UserService,
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -51,6 +55,32 @@ export class UserListComponent implements OnInit {
         this.notificationService.openSnackBar(err);
       }
     );
+  }
+
+  editRow(row) {
+    console.log('editar');
+    console.log(row);
+  }
+
+  deleteRow(row) {
+    console.log('borrar');
+    console.log(row);
+  }
+
+  newRow() {
+    this.matDialog
+      .open(ConfirmDialogComponent, {
+        data: new ConfirmDialogModel(
+          'Titulo del modal',
+          'Mensaje para mostrar'
+        ),
+        disableClose: true,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        console.log(`res: ${res}`);
+      });
+    console.log('Nuevo Registro');
   }
 
   getSelectedRows() {

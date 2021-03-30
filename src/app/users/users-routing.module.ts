@@ -10,6 +10,10 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: UserListComponent },
+      { path: 'add', },
+      { path: ':id/upd', },
+      { path: ':id/del', },
+      { path: ':id', },
     ]
   }
 ];

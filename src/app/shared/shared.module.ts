@@ -10,6 +10,10 @@ import { ContentPlaceholderAnimationComponent } from './content-placeholder-anim
 import { LocalDatePipe } from './pipes/local-date.pipe';
 import { YesNoPipe } from './pipes/yes-no.pipe';
 import { LayoutComponent } from './layout/layout.component';
+import { ActionDeleteBtnComponent } from './action-buttons/action-delete-btn/action-delete-btn.component';
+import { ActionEditBtnComponent } from './action-buttons/action-edit-btn/action-edit-btn.component';
+import { ActionNewFabComponent } from './action-buttons/action-new-fab/action-new-fab.component';
+import { ActionButtonComponent } from './action-buttons/action-button/action-button.component';
 
 @NgModule({
   imports: [
@@ -25,7 +29,12 @@ import { LayoutComponent } from './layout/layout.component';
     LimitToPipe,
     LocalDatePipe,
     YesNoPipe,
-    LayoutComponent
+    LayoutComponent,
+    ActionDeleteBtnComponent,
+    ActionEditBtnComponent,
+    ActionNewFabComponent,
+    ActionButtonComponent,
+    
   ],
   exports: [
     FormsModule,
@@ -36,7 +45,11 @@ import { LayoutComponent } from './layout/layout.component';
     ConfirmDialogComponent,
     ContentPlaceholderAnimationComponent,
     LocalDatePipe,
-    YesNoPipe
+    YesNoPipe,
+    ActionDeleteBtnComponent,
+    ActionEditBtnComponent,
+    ActionNewFabComponent,
+    ActionButtonComponent
   ],
   entryComponents: [
     ConfirmDialogComponent
