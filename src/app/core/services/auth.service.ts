@@ -17,7 +17,7 @@ import { UserRol } from 'src/app/auth/user-rol-enum';
 
 export class AuthenticationService {
     private CURRENT_USER = 'currentUser';
-    private _currentUser: User ; //= new User;
+    private _currentUser: User = new User;
 
     public onChangeUser = new BehaviorSubject<User>(this._currentUser);
     
